@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "754544396292",
+    "project_id": "contact-box-app-official",
+    "storage_bucket": "contact-box-app-official.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:754544396292:android:9807bf654aadcdf9060d51",
+        "android_client_info": {
+          "package_name": "com.example.contact_box"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcu__F5pPNpyT0D24H3HX5pjzuEuYBelg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
