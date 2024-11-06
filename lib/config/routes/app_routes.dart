@@ -1,6 +1,6 @@
 import 'package:contact_box/config/routes/app_routes_name.dart';
-import 'package:contact_box/features/add_or_edit/presentation/pages/add_contact.dart';
-import 'package:contact_box/features/add_or_edit/presentation/pages/edit_contact.dart';
+import 'package:contact_box/features/contacts/presentation/pages/add_contact.dart';
+import 'package:contact_box/features/contacts/presentation/pages/edit_contact.dart';
 import 'package:contact_box/features/auth/presentation/pages/authentication_page.dart';
 import 'package:contact_box/features/main_entry/presentation/pages/main_entry.dart';
 import 'package:contact_box/features/splash_intro/splash_intro.dart';

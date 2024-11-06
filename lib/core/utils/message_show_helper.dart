@@ -44,13 +44,15 @@ class MessageShowhelper {
       ..hideCurrentSnackBar()
       ..showSnackBar(
         SnackBar(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           behavior: SnackBarBehavior.floating,
           content: TextWidgetCommon(
             text: snackBarContent,
             textColor: kWhite,
             fontSize: 16,
           ),
-          backgroundColor: kBlack,
+          backgroundColor: kDarkishBlack,
           duration: const Duration(
             seconds: 1,
           ),

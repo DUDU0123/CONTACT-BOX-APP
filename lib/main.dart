@@ -1,5 +1,7 @@
 import 'package:contact_box/core/service_locator/service_locator.dart';
 import 'package:contact_box/features/auth/presentation/bloc/bloc/authentication_bloc.dart';
+import 'package:contact_box/features/contacts/presentation/bloc/contact_bloc.dart';
+import 'package:contact_box/features/favourite/presentation/bloc/bloc/favorite_bloc.dart';
 import 'package:contact_box/features/main_entry/presentation/bloc/cubit/page_select_cubit.dart';
 import 'package:contact_box/features/root_widget_page.dart';
 import 'package:contact_box/firebase_options.dart';
@@ -21,6 +23,12 @@ Future<void> main() async {
         ),
         BlocProvider(
           create: (context) => serviceLocator<AuthenticationBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => serviceLocator<ContactBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => serviceLocator<FavoriteBloc>(),
         ),
       ],
       child: const RootWidgetPage(),

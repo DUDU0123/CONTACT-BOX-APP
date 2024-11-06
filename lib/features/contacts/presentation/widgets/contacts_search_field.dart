@@ -1,6 +1,9 @@
+import 'package:contact_box/core/components/single_contact_tile.dart';
 import 'package:contact_box/core/components/text_field_common.dart';
 import 'package:contact_box/core/constants/colors.dart';
+import 'package:contact_box/features/contacts/presentation/bloc/contact_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ContactSearchField extends StatefulWidget {
   const ContactSearchField({
@@ -39,6 +42,9 @@ class _ContactSearchFieldState extends State<ContactSearchField> {
           ),
           Expanded(
             child: TextFieldCommon(
+              onChanged: (value) {
+                  context.read<ContactBloc>().add(SearchContactEvent(query: value));
+              },
               hintText: "Search contact",
               textAlign: TextAlign.start,
               controller: contactController,

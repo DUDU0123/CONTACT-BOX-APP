@@ -7,13 +7,14 @@ import 'package:flutter/material.dart';
 
 class CommonTileContainer extends StatelessWidget {
   const CommonTileContainer({
-    super.key, required this.infoName, required this.isTrailingNeeded, required this.title, this.subtitle, required this.leadingIcon,
+    super.key, required this.infoName, required this.isTrailingNeeded, required this.title, this.subtitle, required this.leadingIcon, this.phoneNumber,
   });
   final String infoName;
   final bool isTrailingNeeded;
   final String title;
   final String? subtitle;
   final IconData leadingIcon;
+  final String? phoneNumber;
 
   @override
   Widget build(BuildContext context) {
@@ -55,18 +56,16 @@ class CommonTileContainer extends StatelessWidget {
               children: [
                 commonIconButton(
                   icon: Icons.call,
-                  onPressed: () {
-                    NativeActionMethods.makePhoneCall(
-                        "+916238534634");
+                  onPressed: () async {
+                        phoneNumber!=null?  await NativeActionMethods.makePhoneCall(
+                         phoneNumber!):null;
                   },
                 ),
                 commonIconButton(
                   icon: Icons.message,
                   onPressed: () async {
-                    const String phoneNumber =
-                        '+916238534634'; // Replace with the contact's phone number
-                    await NativeActionMethods.openMessageApp(
-                        phoneNumber: phoneNumber);
+                  phoneNumber!=null?  await NativeActionMethods.openMessageApp(
+                        phoneNumber: phoneNumber!):null;
                   },
                 ),
               ],

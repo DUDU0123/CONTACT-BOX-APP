@@ -1,7 +1,7 @@
 import 'package:contact_box/core/components/text_widget_common.dart';
 import 'package:contact_box/core/constants/height_width.dart';
-import 'package:contact_box/features/contacts_home/presentation/pages/contacts_home.dart';
-import 'package:contact_box/features/contacts_home/presentation/widgets/contacts_search_field.dart';
+import 'package:contact_box/features/contacts/presentation/pages/contacts_home.dart';
+import 'package:contact_box/features/contacts/presentation/widgets/contacts_search_field.dart';
 import 'package:contact_box/features/favourite/presentation/pages/favourite_page.dart';
 import 'package:contact_box/features/main_entry/presentation/bloc/cubit/page_select_cubit.dart';
 import 'package:contact_box/features/main_entry/presentation/widgets/bottom_nav_bar.dart';
@@ -33,7 +33,6 @@ class MainEntry extends StatelessWidget {
               ),
               actions: [
                 if (currentIndex != 1) ...contactHomeAppBarIcons(),
-                if (currentIndex == 1) ...favoriteActionButtons(),
               ],
               bottom: currentIndex == 0
                   ? PreferredSize(
@@ -43,7 +42,7 @@ class MainEntry extends StatelessWidget {
                           : zeroMeasuredWidget,
                     )
                   : null,
-            )
+            ),
           ];
         },
         body: BlocBuilder<PageSelectCubit, PageSelectState>(
@@ -56,4 +55,3 @@ class MainEntry extends StatelessWidget {
     );
   }
 }
-

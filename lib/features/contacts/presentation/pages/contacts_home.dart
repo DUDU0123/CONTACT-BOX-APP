@@ -1,8 +1,10 @@
 import 'package:contact_box/config/routes/app_routes_name.dart';
 import 'package:contact_box/core/constants/app_keys.dart';
 import 'package:contact_box/core/constants/colors.dart';
-import 'package:contact_box/features/contacts_home/presentation/widgets/contacts_list.dart';
+import 'package:contact_box/features/contacts/presentation/bloc/contact_bloc.dart';
+import 'package:contact_box/features/contacts/presentation/widgets/contacts_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ContactsHome extends StatefulWidget {
   const ContactsHome({super.key});
@@ -12,6 +14,11 @@ class ContactsHome extends StatefulWidget {
 }
 
 class _ContactsHomeState extends State<ContactsHome> {
+  @override
+  void initState() {
+    context.read<ContactBloc>().add(GetAllContactsEvent());
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

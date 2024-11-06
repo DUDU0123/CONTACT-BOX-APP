@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 
 class CommonContactAvatar extends StatelessWidget {
   const CommonContactAvatar({
-    super.key, required this.avatarContainerSize,
+    super.key, required this.avatarContainerSize, this.centerAlphabet, this.fontSize,
   });
   final double avatarContainerSize;
+  final String? centerAlphabet;
+  final double? fontSize;
 
   @override
   Widget build(BuildContext context) {
@@ -15,12 +17,12 @@ class CommonContactAvatar extends StatelessWidget {
       width: avatarContainerSize,
       decoration: const BoxDecoration(
         shape: BoxShape.circle,
-        color: kAmber,
+        color: kDarkishBlack,
       ),
-      child: const Center(
+      child:  Center(
         child: TextWidgetCommon(
-          text: "A",
-          fontSize: 20,
+          text: centerAlphabet??"U",
+          fontSize: fontSize?? fontSize,
           textColor: kGreen,
           fontWeight: FontWeight.bold,
         ),
