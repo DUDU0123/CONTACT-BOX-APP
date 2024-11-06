@@ -1,7 +1,8 @@
-import 'package:contact_box/config/routes/app_routes_name.dart';
-import 'package:contact_box/core/constants/app_keys.dart';
-import 'package:contact_box/core/constants/height_width.dart';
+import 'package:contact_box/features/auth/presentation/bloc/bloc/authentication_bloc.dart';
+import 'package:contact_box/features/auth/presentation/pages/authentication_page.dart';
+import 'package:contact_box/features/main_entry/presentation/pages/main_entry.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SplashIntro extends StatefulWidget {
   const SplashIntro({super.key});
@@ -13,33 +14,25 @@ class SplashIntro extends StatefulWidget {
 class _SplashIntroState extends State<SplashIntro> {
   @override
   void initState() {
-    Future.delayed(
-      const Duration(seconds: 2),
-      () {
-        navigatorKey.currentState?.pushNamed(AppRoutesName.mainEntry);
-      },
-    );
+    context.read<AuthenticationBloc>().add(CheckUserLoggedInEvent());
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Container(
-          width: 200,
-          height: 200,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(15),
-            child: Image.asset(
-              "assets/contact_box.png",
-              fit: BoxFit.cover,
-            ),
-          ),
-        ),
+      body: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+        builder: (context, state) {
+          if (state is AuthenticationSuccessState) {
+            if (state.isUserLoggedIn) {
+              return const MainEntry();
+            } else {
+              return const AuthenticationPage();
+            }
+          } else {
+            return const AuthenticationPage();
+          }
+        },
       ),
     );
   }

@@ -5,7 +5,7 @@ import 'package:contact_box/features/contacts_home/presentation/widgets/contacts
 import 'package:contact_box/features/favourite/presentation/pages/favourite_page.dart';
 import 'package:contact_box/features/main_entry/presentation/bloc/cubit/page_select_cubit.dart';
 import 'package:contact_box/features/main_entry/presentation/widgets/bottom_nav_bar.dart';
-import 'package:contact_box/features/main_entry/presentation/widgets/favorite_action_buttons.dart';
+import 'package:contact_box/features/main_entry/presentation/widgets/appbar_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -31,7 +31,10 @@ class MainEntry extends StatelessWidget {
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
               ),
-              actions: currentIndex == 1 ? favoriteActionButtons() : null,
+              actions: [
+                if (currentIndex != 1) ...contactHomeAppBarIcons(),
+                if (currentIndex == 1) ...favoriteActionButtons(),
+              ],
               bottom: currentIndex == 0
                   ? PreferredSize(
                       preferredSize: const Size.fromHeight(60),

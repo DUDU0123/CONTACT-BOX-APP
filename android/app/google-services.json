@@ -12,7 +12,20 @@
           "package_name": "com.example.contact_box"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "754544396292-l5rofrpopqi983octaj37uvtsimdr114.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.contact_box",
+            "certificate_hash": "9898645c844314ae53c49893196e063a5a4f6077"
+          }
+        },
+        {
+          "client_id": "754544396292-cmnvnrco52oh12u9mparjpcv8pl241hv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDcu__F5pPNpyT0D24H3HX5pjzuEuYBelg"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "754544396292-cmnvnrco52oh12u9mparjpcv8pl241hv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "754544396292-22h8aoll4el4p9ieepu47ssrtgmpp1rg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.contactBox"
+              }
+            }
+          ]
         }
       }
     }
