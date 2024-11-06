@@ -91,17 +91,25 @@ class _CommonContactManagePageState extends State<CommonContactManagePage> {
             BlocBuilder<ContactBloc, ContactState>(
               builder: (context, state) {
                 return IntlPhoneField(
-                  initialValue: widget.contact?.contactPersonNumber,
-                  initialCountryCode:
-                      widget.contact?.countryCode ?? state.countryCode,
+                  initialValue: widget.contact != null
+                      ? widget.contact!.countryCodeInNumber != null
+                          ? widget.contact?.contactPersonNumber?.substring(
+                              widget.contact!.countryCodeInNumber!.length,
+                              widget.contact?.contactPersonNumber?.length,
+                            )
+                          : null
+                      : null,
+                  initialCountryCode: widget.contact?.countryIsoCode,
                   decoration: InputDecoration(
                     border: sameBorder(),
                     hintText: "Phone number",
                     labelText: "Enter Phone Number",
                   ),
                   onChanged: (value) {
-                    context.read<ContactBloc>().add(
-                        GetCountryCodeEvent(countryCode: value.countryCode));
+                    // Update the Bloc with the new country code and ISO code
+                    context.read<ContactBloc>().add(GetCountryCodeEvent(
+                        countryIsoCode: value.countryISOCode,
+                        countryCode: value.countryCode));
                     phoneNumberController.text = value.completeNumber;
                   },
                 );
@@ -126,14 +134,31 @@ class _CommonContactManagePageState extends State<CommonContactManagePage> {
                         borderRadius: BorderRadius.circular(8),
                       )),
                   onPressed: () {
-                    String? address = addressController!.text;
+                    String? address = addressController?.text;
                     String? firstName = firstNameController?.text;
                     String? lastName = lastNameController?.text;
                     String number = phoneNumberController.text;
+
+                    // Determine the correct country code and ISO code to pass
+                    String? finalCountryIsoCode =
+                        widget.pageType == PageType.contactEditPage
+                            ? (widget.contact?.countryIsoCode ==
+                                    state.countryIsoCode
+                                ? widget.contact?.countryIsoCode
+                                : state.countryIsoCode)
+                            : state.countryIsoCode;
+
+                    String? finalCountryCode =
+                        widget.pageType == PageType.contactEditPage
+                            ? (widget.contact?.countryCodeInNumber ==
+                                    state.countryCode
+                                ? widget.contact?.countryCodeInNumber
+                                : state.countryCode)
+                            : state.countryCode;
+
                     ContactMethods.addOrEditContact(
-                      countryCode: widget.contact == null
-                          ? state.countryCode
-                          : widget.contact?.countryCode,
+                      countryIsoCode: finalCountryIsoCode,
+                      countryCode: finalCountryCode,
                       fName: firstName,
                       lName: lastName,
                       number: number,

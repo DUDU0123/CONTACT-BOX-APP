@@ -46,11 +46,14 @@ class GetCacheContactEvent extends ContactEvent {}
 
 class GetCountryCodeEvent extends ContactEvent {
   final String countryCode;
+  final String countryIsoCode;
   const GetCountryCodeEvent({
     required this.countryCode,
+    required this.countryIsoCode,
   });
   @override
   List<Object> get props => [
+        countryIsoCode,
         countryCode,
       ];
 }

@@ -8,16 +8,18 @@ class ContactEntity extends Equatable {
   final String? contactPersonNumber;
   final String? contactPersonAddress;
   final String? contactPersonFullName;
-  final String? countryCode;
+  final String? countryIsoCode;
+  final String? countryCodeInNumber;
   const ContactEntity({
     this.contactId,
     this.contactPersonFName,
     this.contactPersonLName,
     this.contactPersonFullName,
+    this.countryCodeInNumber,
     this.contactPersonImage,
     this.contactPersonNumber,
     this.contactPersonAddress,
-    this.countryCode,
+    this.countryIsoCode,
   });
 
   @override
@@ -28,8 +30,8 @@ class ContactEntity extends Equatable {
       contactPersonLName,
       contactPersonImage,
       contactPersonNumber,
-      contactPersonAddress,
-      countryCode,
+      contactPersonAddress,countryCodeInNumber,
+      countryIsoCode,
       contactPersonFullName,
     ];
   }

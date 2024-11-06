@@ -14,6 +14,7 @@ class ContactMethods {
     required String? address,
     ContactEntity? contact,
     required PageType pageType,
+    String? countryIsoCode,
     String? countryCode,
   }) {
     if (pageType == PageType.contactAddPage) {
@@ -28,7 +29,8 @@ class ContactMethods {
           contactPersonLName: lName,
           contactPersonFullName: '$fName $lName',
           contactPersonNumber: number,
-          countryCode: countryCode,
+          countryIsoCode: countryIsoCode,
+          countryCodeInNumber: countryCode,
         );
         navigatorKey.currentContext!
             .read<ContactBloc>()
@@ -48,7 +50,8 @@ class ContactMethods {
           contactPersonFullName:
               '$fName $lName' ?? contact.contactPersonFullName,
           contactPersonNumber: number,
-          countryCode: countryCode??contact.countryCode,
+          countryIsoCode: countryIsoCode??contact.countryIsoCode,
+          countryCodeInNumber: countryCode??contact.countryCodeInNumber,
         );
         navigatorKey.currentContext!
             .read<ContactBloc>()

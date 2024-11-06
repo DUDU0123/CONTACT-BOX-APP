@@ -20,36 +20,44 @@ class UserProfilePage extends StatelessWidget {
       ),
       body: SizedBox(
         width: screenWidth(context: context),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              height: 150,
-              width: 150,
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(100),
-                child: Image.network(
-                  user.photoUrl ?? "",
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) {
-                    return const TextWidgetCommon(text: "U");
-                  },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                height: 150,
+                width: 150,
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(100),
+                  child: Image.network(
+                    user.photoUrl ?? "",
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return const TextWidgetCommon(text: "U");
+                    },
+                  ),
                 ),
               ),
-            ),
-            TextWidgetCommon(
-              text: user.userName ?? "No Name",
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
-            kHeight15,
-            commonUserDetailContainer(value: user.userEmail ?? "No Email"),
-            kHeight15,
-            const LogOutActionButton(),
-          ],
+              TextWidgetCommon(
+                text: user.userName ?? "No Name",
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+              kHeight40,
+              commonUserDetailContainer(
+                  value: user.userName ?? "No Name", label: "Name"),
+              kHeight15,
+              commonUserDetailContainer(
+                  value: user.userEmail ?? "No Email", label: "Email"),
+              kHeight15,
+              const LogOutActionButton(),
+              const Spacer(),
+            ],
+          ),
         ),
       ),
     );

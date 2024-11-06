@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:contact_box/core/constants/db_field_name_constants.dart';
 import 'package:contact_box/core/exceptions/exceptions.dart';
 import 'package:contact_box/core/service_locator/service_locator.dart';
-import 'package:contact_box/features/contacts/data/data_sources/cache_contact_data.dart';
 import 'package:contact_box/features/contacts/data/models/contact_model.dart';
 
 abstract interface class ContactData {
@@ -22,10 +21,8 @@ abstract interface class ContactData {
 
 class ContactDataImpl implements ContactData {
   final FirebaseFirestore firebaseFirestore;
-  final CacheContactData cacheContactData;
   ContactDataImpl({
     required this.firebaseFirestore,
-    required this.cacheContactData,
   });
   @override
   Future<bool> addContact({
@@ -68,11 +65,10 @@ class ContactDataImpl implements ContactData {
       if (currentUser == null) {
         throw ServerException(message: "User is null");
       }
-
       return firebaseFirestore
           .collection(usersCollection)
           .doc(currentUser.uid)
-          .collection(contactsCollection)
+          .collection(contactsCollection).orderBy(dbContactPersonFName)
           .snapshots()
           .map((data) {
         final contacts = data.docs
@@ -82,19 +78,12 @@ class ContactDataImpl implements ContactData {
               ),
             )
             .toList();
-        cacheContactsLocally(contacts);
         return contacts;
       });
     } on FirebaseException catch (e) {
       throw ServerException(message: e.message.toString());
     } catch (e) {
       throw ServerException(message: e.toString());
-    }
-  }
-
-  Future<void> cacheContactsLocally(List<ContactModel> contacts) async {
-    for (var contact in contacts) {
-      await cacheContactData.addContact(contact);
     }
   }
 

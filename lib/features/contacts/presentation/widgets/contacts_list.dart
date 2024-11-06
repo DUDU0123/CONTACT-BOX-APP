@@ -1,7 +1,9 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:contact_box/core/components/empty_text.dart';
 import 'package:contact_box/core/components/single_contact_tile.dart';
 
 import 'package:contact_box/core/constants/height_width.dart';
+import 'package:contact_box/core/network/connection_checker.dart';
 import 'package:contact_box/core/utils/message_show_helper.dart';
 import 'package:contact_box/features/contacts/domain/entity/contact_entity.dart';
 import 'package:contact_box/features/contacts/presentation/bloc/contact_bloc.dart';
@@ -25,16 +27,17 @@ class ContactsList extends StatelessWidget {
         return StreamBuilder<List<ContactEntity>>(
             stream: state.contactsList,
             builder: (context, snapshot) {
-              if (snapshot.data == null) {
+              List<ContactEntity>? contactList = snapshot.data;
+              if (contactList == null) {
                 return emptyText(text: "No contacts");
               }
-              if (snapshot.data!.isEmpty) {
+              if (contactList.isEmpty) {
                 return emptyText(text: "No contacts");
               }
               return ListView.separated(
                 itemBuilder: (context, index) {
                   return SingleContactTile(
-                    contact: snapshot.data![index],
+                    contact: contactList[index],
                   );
                 },
                 separatorBuilder: (context, index) => kHeight10,

@@ -6,17 +6,13 @@ import 'package:contact_box/features/auth/domain/usecase/check_user_loggedIn_use
 import 'package:contact_box/features/auth/domain/usecase/google_signin_usecase.dart';
 import 'package:contact_box/features/auth/domain/usecase/signout_usecase.dart';
 import 'package:contact_box/features/auth/presentation/bloc/bloc/authentication_bloc.dart';
-import 'package:contact_box/features/contacts/data/data_sources/cache_contact_data.dart';
 import 'package:contact_box/features/contacts/data/data_sources/contact_data.dart';
-import 'package:contact_box/features/contacts/data/repository/cache_contact_repo/cache_contact_repo_impl.dart';
 import 'package:contact_box/features/contacts/data/repository/contact_repo/contact_repository_impl.dart';
-import 'package:contact_box/features/contacts/domain/repository/cache_contact_repo/cache_contact_repo.dart';
 import 'package:contact_box/features/contacts/domain/repository/contact_repo/contact_repository.dart';
 import 'package:contact_box/features/contacts/domain/usecase/add_contact_usecase.dart';
 import 'package:contact_box/features/contacts/domain/usecase/delete_contact_usecase.dart';
 import 'package:contact_box/features/contacts/domain/usecase/edit_contact_usecase.dart';
 import 'package:contact_box/features/contacts/domain/usecase/get_all_contacts_usecase.dart';
-import 'package:contact_box/features/contacts/domain/usecase/get_cache_contact_data.dart';
 import 'package:contact_box/features/contacts/presentation/bloc/contact_bloc.dart';
 import 'package:contact_box/features/favourite/data/fav_data/favorite_data.dart';
 import 'package:contact_box/features/favourite/data/fav_repo/favorite_repository_impl.dart';
@@ -86,22 +82,8 @@ void initAuthDependencies() {
 
 initContactDependencies() {
   serviceLocator
-    ..registerFactory<CacheContactData>(
-      () => CacheContactDataImpl(),
-    )
-    ..registerFactory<CacheContactRepo>(
-      () => CacheContactRepoImpl(
-        cacheContactData: serviceLocator<CacheContactData>(),
-      ),
-    )
-    ..registerFactory(
-      () => GetCacheContactDataUseCase(
-        cacheContactRepo: serviceLocator<CacheContactRepo>(),
-      ),
-    )
     ..registerFactory<ContactData>(
       () => ContactDataImpl(
-          cacheContactData: serviceLocator<CacheContactData>(),
           firebaseFirestore: serviceLocator<FirebaseFirestore>()),
     )
     ..registerFactory<ContactRepository>(
@@ -129,8 +111,6 @@ initContactDependencies() {
     )
     ..registerLazySingleton(
       () => ContactBloc(
-        getCacheContactDataUseCase:
-            serviceLocator<GetCacheContactDataUseCase>(),
         getAllContactsUsecase: serviceLocator<GetAllContactsUsecase>(),
         addContactUsecase: serviceLocator<AddContactUsecase>(),
         editContactUsecase: serviceLocator<EditContactUsecase>(),

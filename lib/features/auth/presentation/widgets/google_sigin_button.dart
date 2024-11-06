@@ -1,3 +1,4 @@
+import 'package:contact_box/core/components/common_loading.dart';
 import 'package:contact_box/core/components/text_widget_common.dart';
 import 'package:contact_box/core/constants/colors.dart';
 import 'package:contact_box/core/constants/height_width.dart';
@@ -17,34 +18,38 @@ class GoogleSignInButton extends StatelessWidget {
       onTap: () {
         context.read<AuthenticationBloc>().add(SignInUserEvent());
       },
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 10),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: kBlack,
-            boxShadow: [
-              BoxShadow(
-                color: kWhite.withOpacity(0.4),
-                blurRadius: 1,
-                spreadRadius: 1,
-                offset: const Offset(1, 0),
-              )
-            ]),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SvgPicture.network(
-              height: 40,
-              width: 40,
-              "https://static.cdnlogo.com/logos/g/38/google-icon.svg",
+      child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+        builder: (context, state) {
+          return Container(
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: kBlack,
+                boxShadow: [
+                  BoxShadow(
+                    color: kWhite.withOpacity(0.4),
+                    blurRadius: 1,
+                    spreadRadius: 1,
+                    offset: const Offset(1, 0),
+                  )
+                ]),
+            child: (state is AuthenticationLoadingState)? commonLoading(): Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SvgPicture.network(
+                  height: 40,
+                  width: 40,
+                  "https://static.cdnlogo.com/logos/g/38/google-icon.svg",
+                ),
+                kWidth15,
+                const TextWidgetCommon(
+                  text: "Sign In With Google",
+                  fontWeight: FontWeight.bold,
+                ),
+              ],
             ),
-            kWidth15,
-            const TextWidgetCommon(
-              text: "Sign In With Google",
-              fontWeight: FontWeight.bold,
-            ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

@@ -50,7 +50,7 @@ class CommonTileContainer extends StatelessWidget {
               text: subtitle!,
               fontSize: 14,
               fontWeight: FontWeight.normal,
-            ):zeroMeasuredWidget,
+            ):null,
             trailing: isTrailingNeeded? Row(
               mainAxisSize: MainAxisSize.min,
               children: [

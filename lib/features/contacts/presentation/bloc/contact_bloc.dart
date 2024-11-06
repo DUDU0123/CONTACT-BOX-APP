@@ -10,7 +10,6 @@ import 'package:contact_box/features/contacts/domain/usecase/add_contact_usecase
 import 'package:contact_box/features/contacts/domain/usecase/delete_contact_usecase.dart';
 import 'package:contact_box/features/contacts/domain/usecase/edit_contact_usecase.dart';
 import 'package:contact_box/features/contacts/domain/usecase/get_all_contacts_usecase.dart';
-import 'package:contact_box/features/contacts/domain/usecase/get_cache_contact_data.dart';
 import 'package:contact_box/features/favourite/presentation/bloc/bloc/favorite_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -24,24 +23,20 @@ class ContactBloc extends Bloc<ContactEvent, ContactState> {
   final DeleteContactUsecase _deleteContactUsecase;
   final EditContactUsecase _editContactUsecase;
   final AddContactUsecase _addContactUsecase;
-  final GetCacheContactDataUseCase _getCacheContactDataUseCase;
   ContactBloc({
     required GetAllContactsUsecase getAllContactsUsecase,
     required DeleteContactUsecase deleteContactUsecase,
     required EditContactUsecase editContactUsecase,
     required AddContactUsecase addContactUsecase,
-    required GetCacheContactDataUseCase getCacheContactDataUseCase,
   })  : _getAllContactsUsecase = getAllContactsUsecase,
         _addContactUsecase = addContactUsecase,
         _editContactUsecase = editContactUsecase,
-        _getCacheContactDataUseCase = getCacheContactDataUseCase,
         _deleteContactUsecase = deleteContactUsecase,
         super(ContactInitial()) {
     on<GetAllContactsEvent>(getAllContactsEvent);
     on<AddContactEvent>(addContactEvent);
     on<EditContactEvent>(editContactEvent);
     on<DeleteContactEvent>(deleteContactEvent);
-    on<GetCacheContactEvent>(getCacheContactEvent);
     on<GetCountryCodeEvent>(getCountryCodeEvent);
     on<SearchContactEvent>(searchContactEvent);
   }
@@ -121,27 +116,10 @@ class ContactBloc extends Bloc<ContactEvent, ContactState> {
     }
   }
 
-  FutureOr<void> getCacheContactEvent(
-      GetCacheContactEvent event, Emitter<ContactState> emit) async {
-    try {
-      final res = await _getCacheContactDataUseCase(params: null);
-      res.fold(
-        (failure) {
-          emit(ContactErrorState(message: failure.message));
-        },
-        (contacts) {
-          emit(ContactState(cachedContactList: contacts));
-        },
-      );
-    } catch (e) {
-      emit(ContactErrorState(message: e.toString()));
-    }
-  }
-
   FutureOr<void> getCountryCodeEvent(
       GetCountryCodeEvent event, Emitter<ContactState> emit) {
     try {
-      emit(state.copyWith(countryCode: event.countryCode));
+      emit(state.copyWith(countryCode: event.countryCode, countryIsoCode: event.countryIsoCode));
     } catch (e) {
       emit(ContactErrorState(message: e.toString()));
     }

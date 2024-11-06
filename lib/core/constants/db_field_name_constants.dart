@@ -13,8 +13,9 @@ const dbContactPersonEmail = 'email';
 const dbContactPersonNumber = 'contactNumber';
 const dbContactPersonAddress = 'contactAddress';
 const dbContactPersonImage = 'contactPersonImage';
-const dbContactCountry = 'countryCode';
+const dbContactCountry = 'countryIsoCode';
 const dbContactFullName = 'fullname';
+const dbCountryCodeInNumber = 'countryCode';
 
 // favorite
 const dbFavId = 'id';
@@ -24,3 +25,7 @@ const dbFavContactId = 'contactId';
 const usersCollection = 'users';
 const contactsCollection = 'contacts';
 const favoritesCollection = 'favorites';
+
+// cache table name
+const contactCache = 'contactsTable';
+const favCache = 'favoriteTable';

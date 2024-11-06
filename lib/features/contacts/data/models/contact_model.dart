@@ -9,7 +9,8 @@ class ContactModel extends ContactEntity {
       super.contactPersonFName,
       super.contactPersonLName,
       super.contactPersonNumber,
-      super.countryCode,
+      super.countryCodeInNumber,
+      super.countryIsoCode,
       super.contactPersonFullName});
 
   factory ContactModel.fromJson(Map<String, dynamic> json) {
@@ -20,8 +21,9 @@ class ContactModel extends ContactEntity {
       contactPersonFName: json[dbContactPersonFName] as String?,
       contactPersonLName: json[dbContactPersonLName] as String?,
       contactPersonNumber: json[dbContactPersonNumber] as String?,
-      countryCode: json[dbContactCountry] as String?,
+      countryIsoCode: json[dbContactCountry] as String?,
       contactPersonFullName: json[dbContactFullName] as String?,
+      countryCodeInNumber: json[dbCountryCodeInNumber] as String?,
     );
   }
 
@@ -33,8 +35,9 @@ class ContactModel extends ContactEntity {
       dbContactPersonFName: contactPersonFName,
       dbContactPersonLName: contactPersonLName,
       dbContactPersonNumber: contactPersonNumber,
-      dbContactCountry: countryCode,
+      dbContactCountry: countryIsoCode,
       dbContactFullName: contactPersonFullName,
+      dbCountryCodeInNumber: countryCodeInNumber,
     };
   }
 
@@ -44,12 +47,13 @@ class ContactModel extends ContactEntity {
     String? contactPersonImage,
     String? contactPersonFName,
     String? contactPersonLName,
-    String? countryCode,
+    String? countryIsoCode,
     String? contactPersonNumber,
     String? contactPersonFullName,
+    String? countryCodeInNumber,
   }) {
     return ContactModel(
-      countryCode: countryCode ?? this.countryCode,
+      countryIsoCode: countryIsoCode ?? this.countryIsoCode,
       contactId: contactId ?? this.contactId,
       contactPersonAddress: contactPersonAddress ?? this.contactPersonAddress,
       contactPersonImage: contactPersonImage ?? this.contactPersonImage,
@@ -58,6 +62,7 @@ class ContactModel extends ContactEntity {
       contactPersonNumber: contactPersonNumber ?? this.contactPersonNumber,
       contactPersonFullName:
           contactPersonFullName ?? this.contactPersonFullName,
+      countryCodeInNumber: countryCodeInNumber ?? this.countryCodeInNumber,
     );
   }
 }
