@@ -69,8 +69,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
           emit(AuthenticationErrorState(message: failure.message));
         },
         (result) {
-          // Set isUserLoggedIn to true explicitly after sign-in
-          emit(const AuthenticationSuccessState(isUserLoggedIn: true));
+          add(CheckUserLoggedInEvent());
         },
       );
     } catch (e) {
