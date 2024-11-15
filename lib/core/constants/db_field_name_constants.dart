@@ -16,6 +16,7 @@ const dbContactPersonImage = 'contactPersonImage';
 const dbContactCountry = 'countryIsoCode';
 const dbContactFullName = 'fullname';
 const dbCountryCodeInNumber = 'countryCode';
+const dbNumberWithoutCountryCode = 'numberWithoutCountryCode';
 
 // favorite
 const dbFavId = 'id';

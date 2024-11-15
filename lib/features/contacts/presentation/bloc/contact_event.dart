@@ -47,14 +47,15 @@ class GetCacheContactEvent extends ContactEvent {}
 class GetCountryCodeEvent extends ContactEvent {
   final String countryCode;
   final String countryIsoCode;
+  final String numberOnly;
   const GetCountryCodeEvent({
     required this.countryCode,
-    required this.countryIsoCode,
+    required this.countryIsoCode,required this.numberOnly,
   });
   @override
   List<Object> get props => [
         countryIsoCode,
-        countryCode,
+        countryCode,numberOnly,
       ];
 }
 

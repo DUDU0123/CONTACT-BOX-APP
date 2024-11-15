@@ -32,7 +32,7 @@ class AuthDataImpl implements AuthData {
       // Retrieve the authentication tokens
       final GoogleSignInAuthentication gAuth = await googleUser.authentication;
 
-      // Check for null tokens (unlikely but good practice)
+      // Check for null tokens
       if (gAuth.accessToken == null || gAuth.idToken == null) {
         throw ServerException(message: "Authentication tokens are null");
       }
@@ -65,7 +65,7 @@ class AuthDataImpl implements AuthData {
             .set(userModel.toJson());
             setAuthUser(isLoggedIn: true);
       } else {
-        throw ServerException(message: "User is null; cannot create account");
+        throw ServerException(message: "User is null cannot create account");
       }
     } catch (e) {
       throw ServerException(message: e.toString());

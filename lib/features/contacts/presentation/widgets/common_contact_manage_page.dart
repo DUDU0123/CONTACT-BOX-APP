@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:contact_box/core/components/text_field_common.dart';
 import 'package:contact_box/core/components/text_widget_common.dart';
 import 'package:contact_box/core/constants/colors.dart';
@@ -108,8 +110,11 @@ class _CommonContactManagePageState extends State<CommonContactManagePage> {
                   onChanged: (value) {
                     // Update the Bloc with the new country code and ISO code
                     context.read<ContactBloc>().add(GetCountryCodeEvent(
+                      numberOnly: value.number,
                         countryIsoCode: value.countryISOCode,
                         countryCode: value.countryCode));
+                        log(value.toString());
+
                     phoneNumberController.text = value.completeNumber;
                   },
                 );
@@ -155,12 +160,22 @@ class _CommonContactManagePageState extends State<CommonContactManagePage> {
                                 ? widget.contact?.countryCodeInNumber
                                 : state.countryCode)
                             : state.countryCode;
+                    String? numberOnly =
+                        widget.pageType == PageType.contactEditPage
+                            ? (widget.contact?.contactPersonNumberWithoutCountryCode ==
+                                    state.numberOnly
+                                ? widget.contact?.contactPersonNumberWithoutCountryCode
+                                : state.numberOnly)
+                            : state.numberOnly;
+
+                            log("Phone number: ${phoneNumberController.text} and $finalCountryCode");
 
                     ContactMethods.addOrEditContact(
                       countryIsoCode: finalCountryIsoCode,
                       countryCode: finalCountryCode,
                       fName: firstName,
                       lName: lastName,
+                      numberOnly: numberOnly,
                       number: number,
                       address: address,
                       pageType: widget.pageType,

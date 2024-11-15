@@ -1,6 +1,5 @@
 import 'package:contact_box/core/components/common_contact_avatar.dart';
 import 'package:contact_box/core/components/common_loading.dart';
-import 'package:contact_box/core/components/empty_text.dart';
 import 'package:contact_box/core/components/text_widget_common.dart';
 import 'package:contact_box/core/constants/height_width.dart';
 import 'package:contact_box/core/utils/common_functions.dart';

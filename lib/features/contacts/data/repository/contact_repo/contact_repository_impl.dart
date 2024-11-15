@@ -24,6 +24,7 @@ class ContactRepositoryImpl implements ContactRepository {
         contactPersonFullName: contact.contactPersonFullName,
         countryIsoCode: contact.countryIsoCode,
         countryCodeInNumber: contact.countryCodeInNumber,
+        contactPersonNumberWithoutCountryCode: contact.contactPersonNumberWithoutCountryCode,
       );
       final result = await contactData.addContact(contactModel: contactModel);
       return right(result);
@@ -60,7 +61,8 @@ class ContactRepositoryImpl implements ContactRepository {
         contactPersonNumber: updatedContact.contactPersonNumber,
         contactPersonFullName: updatedContact.contactPersonFullName,
         countryIsoCode: updatedContact.countryIsoCode,
-        countryCodeInNumber: updatedContact.countryCodeInNumber
+        countryCodeInNumber: updatedContact.countryCodeInNumber,
+        contactPersonNumberWithoutCountryCode: updatedContact.contactPersonNumberWithoutCountryCode,
       );
       final result = await contactData.editContact(updatedModel: contactModel);
       return right(result);

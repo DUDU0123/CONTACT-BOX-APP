@@ -6,6 +6,7 @@ class ContactEntity extends Equatable {
   final String? contactPersonLName;
   final String? contactPersonImage;
   final String? contactPersonNumber;
+  final String? contactPersonNumberWithoutCountryCode;
   final String? contactPersonAddress;
   final String? contactPersonFullName;
   final String? countryIsoCode;
@@ -19,7 +20,7 @@ class ContactEntity extends Equatable {
     this.contactPersonImage,
     this.contactPersonNumber,
     this.contactPersonAddress,
-    this.countryIsoCode,
+    this.countryIsoCode,this.contactPersonNumberWithoutCountryCode
   });
 
   @override
@@ -32,7 +33,7 @@ class ContactEntity extends Equatable {
       contactPersonNumber,
       contactPersonAddress,countryCodeInNumber,
       countryIsoCode,
-      contactPersonFullName,
+      contactPersonFullName,contactPersonNumberWithoutCountryCode,
     ];
   }
 }

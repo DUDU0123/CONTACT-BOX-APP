@@ -10,21 +10,23 @@ class ContactModel extends ContactEntity {
       super.contactPersonLName,
       super.contactPersonNumber,
       super.countryCodeInNumber,
+      super.contactPersonNumberWithoutCountryCode,
       super.countryIsoCode,
       super.contactPersonFullName});
 
   factory ContactModel.fromJson(Map<String, dynamic> json) {
     return ContactModel(
-      contactId: json[dbContactId] as String?,
-      contactPersonAddress: json[dbContactPersonAddress] as String?,
-      contactPersonImage: json[dbContactPersonImage] as String?,
-      contactPersonFName: json[dbContactPersonFName] as String?,
-      contactPersonLName: json[dbContactPersonLName] as String?,
-      contactPersonNumber: json[dbContactPersonNumber] as String?,
-      countryIsoCode: json[dbContactCountry] as String?,
-      contactPersonFullName: json[dbContactFullName] as String?,
-      countryCodeInNumber: json[dbCountryCodeInNumber] as String?,
-    );
+        contactId: json[dbContactId] as String?,
+        contactPersonAddress: json[dbContactPersonAddress] as String?,
+        contactPersonImage: json[dbContactPersonImage] as String?,
+        contactPersonFName: json[dbContactPersonFName] as String?,
+        contactPersonLName: json[dbContactPersonLName] as String?,
+        contactPersonNumber: json[dbContactPersonNumber] as String?,
+        countryIsoCode: json[dbContactCountry] as String?,
+        contactPersonFullName: json[dbContactFullName] as String?,
+        countryCodeInNumber: json[dbCountryCodeInNumber] as String?,
+        contactPersonNumberWithoutCountryCode:
+            json[dbNumberWithoutCountryCode] as String?);
   }
 
   Map<String, dynamic> toJson() {
@@ -38,6 +40,7 @@ class ContactModel extends ContactEntity {
       dbContactCountry: countryIsoCode,
       dbContactFullName: contactPersonFullName,
       dbCountryCodeInNumber: countryCodeInNumber,
+      dbNumberWithoutCountryCode: contactPersonNumberWithoutCountryCode,
     };
   }
 
@@ -51,6 +54,7 @@ class ContactModel extends ContactEntity {
     String? contactPersonNumber,
     String? contactPersonFullName,
     String? countryCodeInNumber,
+    String? contactPersonNumberWithoutCountryCode,
   }) {
     return ContactModel(
       countryIsoCode: countryIsoCode ?? this.countryIsoCode,
@@ -63,6 +67,9 @@ class ContactModel extends ContactEntity {
       contactPersonFullName:
           contactPersonFullName ?? this.contactPersonFullName,
       countryCodeInNumber: countryCodeInNumber ?? this.countryCodeInNumber,
+      contactPersonNumberWithoutCountryCode:
+          contactPersonNumberWithoutCountryCode ??
+              this.contactPersonNumberWithoutCountryCode,
     );
   }
 }
